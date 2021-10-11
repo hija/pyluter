@@ -1,8 +1,10 @@
 
 import numpy as np
+from numpy import ndarray
+
 class LUT:
     """
-    Following the documentation from 
+    Following the documentation from
     https://wwwimages2.adobe.com/content/dam/acom/en/products/speedgrade/cc/pdfs/cube-lut-specification-1.0.pdf
     """
 
@@ -15,10 +17,10 @@ class LUT:
         """
         self._filepath = filepath
 
-        self._title = None #or undefined as said in the docu
-        self._domain_min = np.array([0, 0, 0]) # according to docu
-        self._domain_max = np.array([1, 1, 1]) # according to docu
-    
+        self._title = None  # or undefined as said in the docu
+        self._domain_min = np.array([0, 0, 0])  # according to docu
+        self._domain_max = np.array([1, 1, 1])  # according to docu
+
         self._parse_LUT()
 
     def _parse_LUT(self):
@@ -67,14 +69,14 @@ class LUT:
                 numbers.append(float(currentnumber))
                 currentnumber = ""
         if len(currentnumber) > 0:
-                numbers.append(float(currentnumber))
-        
+            numbers.append(float(currentnumber))
+
         return np.array(numbers)
 
     @property
     def title(self):
         return self._title
-    
+
     @property
     def domain_min(self):
         return self._domain_min
@@ -83,14 +85,13 @@ class LUT:
     def domain_max(self):
         return self._domain_max
 
-from numpy import ndarray
 
 class Pyluter:
 
     @staticmethod
     def apply_LUT(image, lut: LUT):
 
-        ## Load image as ndarray
+        # Load image as ndarray
         if not isinstance(image, ndarray):
             # Load image first
             try:
@@ -100,7 +101,6 @@ class Pyluter:
             _image_array = cv2.imread(image)
         else:
             _image_array = image
-        
-        ## Apply ndarray
-        raise NotImplementedError()
 
+        # Apply ndarray
+        raise NotImplementedError()
